@@ -14,9 +14,7 @@ var _data = require('./lib/data')
 
 //TESTING
 // @TODO delete this after
-_data.create('test', 'newFile', {
-  'foo': 'bar'
-}, (err) => {
+_data.delete('test', 'newFile', (err, data) => {
   console.log('this was the error: ', err)
 })
 
