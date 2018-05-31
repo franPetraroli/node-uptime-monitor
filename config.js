@@ -7,8 +7,8 @@
 var enviroments = {}
 
 enviroments.staging = {
-  'httpport': 3000,
-  'https': 3001,
+  'httpPort': 3000,
+  'httpsPort': 3001,
   'envName': 'staging'
 }
 

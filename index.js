@@ -10,6 +10,15 @@ var fs = require('fs')
 var url = require('url')
 var StringDecoder = require('string_decoder').StringDecoder
 var config = require('./config')
+var _data = require('./lib/data')
+
+//TESTING
+// @TODO delete this after
+_data.create('test', 'newFile', {
+  'foo': 'bar'
+}, (err) => {
+  console.log('this was the error: ', err)
+})
 
 
 //Instantiating the HTTP server
@@ -41,11 +50,9 @@ httpsServer.listen(config.httpsPort, function () {
 var handlers = {}
 
 //Smaple handler
-handlers.sample = (data, callback) => {
+handlers.ping = (data, callback) => {
   //Callback a hhtp status code, and a payload object
-  callback(406, {
-    'name': 'sample handler'
-  })
+  callback(200)
 }
 
 //Smaple handler
@@ -55,11 +62,11 @@ handlers.notFound = (data, callback) => {
 
 //Define a request router
 var router = {
-  'sample': handlers.sample
+  'ping': handlers.ping
 }
 
 //All the server logic
-var unifiedServer = () => {
+var unifiedServer = (req, res) => {
   //Get the URL and parse it
   var parsedUrl = url.parse(req.url, true)
 
